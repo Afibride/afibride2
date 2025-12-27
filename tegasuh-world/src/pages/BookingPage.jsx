@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { toast } from 'react-toastify';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { 
@@ -20,7 +21,10 @@ import {
   FaQuestionCircle,
   FaStar,
   FaChevronRight,
-  FaChevronLeft
+  FaChevronLeft,
+  FaHeadset,
+  FaClock,
+  FaInfoCircle
 } from 'react-icons/fa';
 import '../css/Booking.css';
 
@@ -53,7 +57,8 @@ const BookingPage = () => {
         'Flexible date searches',
         'Group booking discounts'
       ],
-      popular: true
+      popular: true,
+      color: '#2196F3'
     },
     { 
       id: 'hotel', 
@@ -65,7 +70,8 @@ const BookingPage = () => {
         'Customer reviews',
         'Best locations',
         'Package deals'
-      ]
+      ],
+      color: '#FF9800'
     },
     { 
       id: 'cruise', 
@@ -78,7 +84,8 @@ const BookingPage = () => {
         'Shore excursions',
         'Romantic getaways'
       ],
-      popular: true
+      popular: true,
+      color: '#4CAF50'
     },
     { 
       id: 'car-rental', 
@@ -90,7 +97,8 @@ const BookingPage = () => {
         'Insurance included',
         '24/7 assistance',
         'One-way rentals'
-      ]
+      ],
+      color: '#795548'
     },
     { 
       id: 'sightseeing', 
@@ -102,7 +110,8 @@ const BookingPage = () => {
         'Cultural experiences',
         'Customizable itineraries',
         'Photography tours'
-      ]
+      ],
+      color: '#9C27B0'
     },
     { 
       id: 'airport-pickup', 
@@ -114,7 +123,8 @@ const BookingPage = () => {
         'Flight monitoring',
         'Comfortable vehicles',
         '24/7 availability'
-      ]
+      ],
+      color: '#607D8B'
     }
   ];
 
@@ -136,8 +146,23 @@ const BookingPage = () => {
   };
 
   const handleServiceSelect = (serviceName) => {
+    const service = services.find(s => s.name === serviceName);
     setFormData(prev => ({ ...prev, serviceType: serviceName }));
-    // Auto-advance to next step after selecting a service
+    
+    toast.success(
+      <div>
+        <strong>{serviceName} selected!</strong>
+        <br />
+        <small>{service?.description}</small>
+      </div>,
+      {
+        position: "top-center",
+        autoClose: 2000,
+        hideProgressBar: true,
+        icon: service?.icon
+      }
+    );
+    
     setTimeout(() => {
       if (step === 1) nextStep();
     }, 500);
@@ -145,16 +170,54 @@ const BookingPage = () => {
 
   const nextStep = () => {
     if (validateStep()) {
+      const stepMessages = {
+        1: 'Great choice! Moving to personal details',
+        2: 'Information saved! Moving to travel details',
+        3: 'Travel plans added! Final review step'
+      };
+      
+      if (stepMessages[step]) {
+        toast.success(stepMessages[step], {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
+      }
+      
       setStep(prev => Math.min(prev + 1, 4));
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      alert('Please fill in all required fields before proceeding.');
+      const errorMessages = {
+        1: 'Please select a service to continue',
+        2: 'Please fill in all required personal details',
+        3: 'Please provide destination and departure date',
+        4: 'Please accept terms and conditions'
+      };
+      
+      toast.error(errorMessages[step] || 'Please fill in all required fields', {
+        position: "top-right",
+        autoClose: 4000,
+        hideProgressBar: false,
+      });
     }
   };
 
   const prevStep = () => {
     setStep(prev => Math.max(prev - 1, 1));
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    const stepNames = {
+      1: 'service selection',
+      2: 'personal details',
+      3: 'travel details',
+      4: 'confirmation'
+    };
+    
+    toast.info(`Returning to ${stepNames[step - 1]}`, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: true,
+    });
   };
 
   const validateStep = () => {
@@ -176,33 +239,133 @@ const BookingPage = () => {
     e.preventDefault();
     
     if (!validateStep()) {
-      alert('Please fill in all required fields');
+      toast.error('Please complete all required fields before submitting', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+      });
       return;
     }
 
-    // Simulate API call
-    console.log('Booking submitted:', formData);
+    const toastId = toast.loading(
+      <div>
+        <strong>Processing your booking request...</strong>
+        <br />
+        <small>Please wait a moment</small>
+      </div>,
+      {
+        position: "top-center",
+        autoClose: false,
+        hideProgressBar: false,
+      }
+    );
+
+    setTimeout(() => {
+      console.log('Booking submitted:', formData);
+      
+      toast.update(toastId, {
+        render: (
+          <div>
+            <strong>🎉 Booking Request Submitted!</strong>
+            <br />
+            <small>We'll contact you within 24 hours</small>
+          </div>
+        ),
+        type: "success",
+        isLoading: false,
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+      });
+
+      setTimeout(() => {
+        toast.success(
+          <div>
+            <strong>📞 Contact Information</strong>
+            <br />
+            <small>Phone: +237 {formData.phone}</small>
+            <br />
+            <small>Email: {formData.email}</small>
+            <br />
+            <small>Service: {formData.serviceType}</small>
+          </div>,
+          {
+            position: "top-center",
+            autoClose: 8000,
+            hideProgressBar: false,
+          }
+        );
+      }, 1000);
+
+      setFormData({
+        serviceType: '',
+        name: '',
+        email: '',
+        phone: '',
+        travelers: 1,
+        departureDate: '',
+        returnDate: '',
+        destination: '',
+        specialRequests: '',
+        paymentMethod: 'cash',
+        termsAccepted: false
+      });
+      
+      setStep(1);
+      
+      toast.info(
+        <div>
+          <strong>📋 New Booking Available</strong>
+          <br />
+          <small>Ready to plan your next adventure?</small>
+        </div>,
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+        }
+      );
+    }, 2000);
+  };
+
+  const handlePaymentSelect = (methodId) => {
+    setFormData(prev => ({ ...prev, paymentMethod: methodId }));
     
-    // Show success message
-    alert(`Booking request submitted successfully!\n\nWe will contact you within 24 hours at ${formData.phone} to confirm your ${formData.serviceType} booking.`);
+    const method = paymentMethods.find(m => m.id === methodId);
+    if (method) {
+      toast.info(
+        <div>
+          <strong>{method.icon} {method.name} selected</strong>
+          <br />
+          <small>{method.description}</small>
+        </div>,
+        {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: true,
+          icon: false,
+        }
+      );
+    }
+  };
+
+  const handleTermsChange = (e) => {
+    const { checked } = e.target;
+    setFormData(prev => ({ ...prev, termsAccepted: checked }));
     
-    // Reset form
-    setFormData({
-      serviceType: '',
-      name: '',
-      email: '',
-      phone: '',
-      travelers: 1,
-      departureDate: '',
-      returnDate: '',
-      destination: '',
-      specialRequests: '',
-      paymentMethod: 'cash',
-      termsAccepted: false
-    });
-    
-    // Reset to first step
-    setStep(1);
+    if (checked) {
+      toast.success('✓ Terms and conditions accepted', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    } else {
+      toast.warning('Terms and conditions not accepted', {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+      });
+    }
   };
 
   const getStepProgress = () => {
@@ -218,11 +381,59 @@ const BookingPage = () => {
         <h4>Features included:</h4>
         <ul>
           {service.features.map((feature, idx) => (
-            <li key={idx}><FaStar /> {feature}</li>
+            <li key={idx}><FaCheckCircle /> {feature}</li>
           ))}
         </ul>
       </div>
     );
+  };
+
+  const handleHelpClick = (type) => {
+    const messages = {
+      phone: 'Call our travel experts for immediate assistance',
+      faq: 'Browse our frequently asked questions',
+      secure: 'Your information is protected with 256-bit SSL encryption',
+      info: 'Need help? Our team is available 24/7'
+    };
+    
+    toast.info(messages[type], {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+    });
+  };
+
+  const handleServiceHover = (serviceName) => {
+    const service = services.find(s => s.name === serviceName);
+    toast.info(
+      <div>
+        <strong>{serviceName}</strong>
+        <br />
+        <small>{service?.description}</small>
+      </div>,
+      {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        toastId: serviceName,
+      }
+    );
+  };
+
+  const handleEditDetails = () => {
+    setStep(1);
+    toast.info('Returning to edit details', {
+      position: "top-right",
+      autoClose: 2000,
+    });
+  };
+
+  const handleClearService = () => {
+    setFormData(prev => ({ ...prev, serviceType: '' }));
+    toast.info('Service selection cleared', {
+      position: "bottom-right",
+      autoClose: 2000,
+    });
   };
 
   return (
@@ -231,13 +442,14 @@ const BookingPage = () => {
       
       <div className="booking-page">
         <div className="container">
-          {/* Booking Header */}
           <div className="booking-header">
             <h1>Book Your Travel Service</h1>
             <p>Complete the form below to book your travel with Tegasuh World</p>
+            <div className="booking-subtitle">
+              <FaInfoCircle /> Simple 4-step process | Secure booking | 24/7 support
+            </div>
           </div>
 
-          {/* Progress Tracker */}
           <div className="booking-progress-tracker">
             <div className="progress-bar">
               <div 
@@ -246,27 +458,24 @@ const BookingPage = () => {
               ></div>
             </div>
             <div className="progress-steps">
-              <div className={`progress-step ${step >= 1 ? 'active' : ''}`}>
-                <span className="step-number">1</span>
-                <span className="step-label">Select Service</span>
-              </div>
-              <div className={`progress-step ${step >= 2 ? 'active' : ''}`}>
-                <span className="step-number">2</span>
-                <span className="step-label">Your Details</span>
-              </div>
-              <div className={`progress-step ${step >= 3 ? 'active' : ''}`}>
-                <span className="step-number">3</span>
-                <span className="step-label">Travel Info</span>
-              </div>
-              <div className={`progress-step ${step >= 4 ? 'active' : ''}`}>
-                <span className="step-number">4</span>
-                <span className="step-label">Confirm</span>
-              </div>
+              {[1, 2, 3, 4].map((stepNum) => (
+                <div 
+                  key={stepNum} 
+                  className={`progress-step ${step >= stepNum ? 'active' : ''}`}
+                  onClick={() => stepNum < step ? setStep(stepNum) : null}
+                >
+                  <span className="step-number">{stepNum}</span>
+                  <span className="step-label">
+                    {stepNum === 1 ? 'Select Service' : 
+                     stepNum === 2 ? 'Your Details' : 
+                     stepNum === 3 ? 'Travel Info' : 'Confirm'}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
 
           <form onSubmit={handleSubmit} className="booking-form-container">
-            {/* Step 1: Service Selection */}
             {step === 1 && (
               <div className="booking-step service-selection-step">
                 <div className="step-header">
@@ -274,7 +483,6 @@ const BookingPage = () => {
                   <p>Choose the service you want to book. We offer comprehensive travel solutions for all your needs.</p>
                 </div>
                 
-                {/* Popular Services */}
                 {popularServices.length > 0 && (
                   <div className="services-section">
                     <h3 className="section-subtitle">
@@ -286,16 +494,17 @@ const BookingPage = () => {
                           key={service.id}
                           className={`service-option ${formData.serviceType === service.name ? 'selected' : ''}`}
                           onClick={() => handleServiceSelect(service.name)}
+                          onMouseEnter={() => handleServiceHover(service.name)}
                         >
                           <div className="service-option-header">
-                            <div className="service-icon">{service.icon}</div>
+                            <div className="service-icon" style={{ color: service.color }}>
+                              {service.icon}
+                            </div>
                             <div className="service-info">
                               <h3>{service.name}</h3>
                               <p className="service-description">{service.description}</p>
                             </div>
-                            {service.popular && (
-                              <span className="popular-badge">Popular</span>
-                            )}
+                            <span className="popular-badge">🔥 Popular</span>
                           </div>
                           <div className="service-features">
                             {service.features.slice(0, 3).map((feature, idx) => (
@@ -313,7 +522,6 @@ const BookingPage = () => {
                   </div>
                 )}
                 
-                {/* All Services */}
                 <div className="services-section">
                   <h3 className="section-subtitle">
                     <FaCheckCircle /> All Services
@@ -324,9 +532,12 @@ const BookingPage = () => {
                         key={service.id}
                         className={`service-option ${formData.serviceType === service.name ? 'selected' : ''}`}
                         onClick={() => handleServiceSelect(service.name)}
+                        onMouseEnter={() => handleServiceHover(service.name)}
                       >
                         <div className="service-option-header">
-                          <div className="service-icon">{service.icon}</div>
+                          <div className="service-icon" style={{ color: service.color }}>
+                            {service.icon}
+                          </div>
                           <div className="service-info">
                             <h3>{service.name}</h3>
                             <p className="service-description">{service.description}</p>
@@ -347,7 +558,6 @@ const BookingPage = () => {
                   </div>
                 </div>
                 
-                {/* Selected Service Display */}
                 {formData.serviceType && (
                   <div className="selected-service-summary">
                     <div className="selected-service-header">
@@ -355,7 +565,7 @@ const BookingPage = () => {
                       <button 
                         type="button" 
                         className="btn-change"
-                        onClick={() => setFormData(prev => ({ ...prev, serviceType: '' }))}
+                        onClick={handleClearService}
                       >
                         Change
                       </button>
@@ -375,7 +585,6 @@ const BookingPage = () => {
               </div>
             )}
 
-            {/* Step 2: Personal Details */}
             {step === 2 && (
               <div className="booking-step personal-details-step">
                 <div className="step-header">
@@ -463,7 +672,6 @@ const BookingPage = () => {
               </div>
             )}
 
-            {/* Step 3: Travel Details */}
             {step === 3 && (
               <div className="booking-step travel-details-step">
                 <div className="step-header">
@@ -531,7 +739,6 @@ const BookingPage = () => {
               </div>
             )}
 
-            {/* Step 4: Payment & Confirmation */}
             {step === 4 && (
               <div className="booking-step confirmation-step">
                 <div className="step-header">
@@ -540,14 +747,13 @@ const BookingPage = () => {
                 </div>
                 
                 <div className="confirmation-grid">
-                  {/* Booking Summary */}
                   <div className="booking-summary-card">
                     <div className="summary-header">
                       <h3>Booking Summary</h3>
                       <button 
                         type="button" 
                         className="btn-edit"
-                        onClick={() => setStep(1)}
+                        onClick={handleEditDetails}
                       >
                         Edit Details
                       </button>
@@ -625,7 +831,6 @@ const BookingPage = () => {
                     </div>
                   </div>
 
-                  {/* Payment Methods */}
                   <div className="payment-section">
                     <div className="payment-methods-card">
                       <h3>Select Payment Method</h3>
@@ -636,7 +841,7 @@ const BookingPage = () => {
                           <div 
                             key={method.id}
                             className={`payment-option ${formData.paymentMethod === method.id ? 'selected' : ''}`}
-                            onClick={() => setFormData(prev => ({ ...prev, paymentMethod: method.id }))}
+                            onClick={() => handlePaymentSelect(method.id)}
                           >
                             <div className="payment-option-header">
                               <span className="payment-icon">{method.icon}</span>
@@ -653,7 +858,6 @@ const BookingPage = () => {
                       </div>
                     </div>
 
-                    {/* Terms & Conditions */}
                     <div className="terms-card">
                       <div className="terms-header">
                         <FaShieldAlt />
@@ -667,11 +871,16 @@ const BookingPage = () => {
                             id="termsAccepted"
                             name="termsAccepted"
                             checked={formData.termsAccepted}
-                            onChange={handleChange}
+                            onChange={handleTermsChange}
                             required
                           />
                           <label htmlFor="termsAccepted">
-                            I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer">Terms & Conditions</a> and 
+                            I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer" onClick={(e) => {
+                              e.preventDefault();
+                              toast.info('Opening Terms & Conditions', {
+                                position: 'bottom-right',
+                              });
+                            }}>Terms & Conditions</a> and 
                             confirm that the information provided is accurate. I understand that this is a booking request 
                             and final confirmation is subject to availability.
                           </label>
@@ -698,7 +907,6 @@ const BookingPage = () => {
               </div>
             )}
 
-            {/* Navigation Buttons */}
             <div className="booking-navigation">
               {step > 1 && (
                 <button 
@@ -732,10 +940,9 @@ const BookingPage = () => {
             </div>
           </form>
 
-          {/* Help & Support Section */}
           <div className="booking-help-section">
             <div className="help-grid">
-              <div className="help-card">
+              <div className="help-card" onClick={() => handleHelpClick('phone')}>
                 <div className="help-icon">
                   <FaPhone />
                 </div>
@@ -748,7 +955,7 @@ const BookingPage = () => {
                 </div>
               </div>
               
-              <div className="help-card">
+              <div className="help-card" onClick={() => handleHelpClick('faq')}>
                 <div className="help-icon">
                   <FaQuestionCircle />
                 </div>
@@ -761,7 +968,7 @@ const BookingPage = () => {
                 </div>
               </div>
               
-              <div className="help-card">
+              <div className="help-card" onClick={() => handleHelpClick('secure')}>
                 <div className="help-icon">
                   <FaShieldAlt />
                 </div>
@@ -769,6 +976,17 @@ const BookingPage = () => {
                   <h3>Secure Booking</h3>
                   <p>Your information is protected with 256-bit SSL encryption</p>
                   <span className="security-badge">SSL Secured</span>
+                </div>
+              </div>
+              
+              <div className="help-card" onClick={() => handleHelpClick('info')}>
+                <div className="help-icon">
+                  <FaHeadset />
+                </div>
+                <div className="help-content">
+                  <h3>24/7 Support</h3>
+                  <p>Get assistance anytime, day or night</p>
+                  <span className="support-badge">Always Available</span>
                 </div>
               </div>
             </div>

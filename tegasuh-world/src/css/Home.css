@@ -1,6 +1,7 @@
 /* Home Page Specific Styles */
 .home-page {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
+  width: 100vw;
 }
 
 /* Hero Slider */
@@ -180,7 +181,7 @@
   font-size: 3rem;
   font-weight: 800;
   margin: 0;
-  background: linear-gradient(135deg, #fff 0%, #e3f2fd 100%);
+  background: linear-gradient(135deg, #ba8585 0%, #e3f2fd 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -268,7 +269,7 @@
 
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(3, 1fr) !important;  
   gap: 2.5rem;
 }
 

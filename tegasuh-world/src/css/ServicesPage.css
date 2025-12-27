@@ -104,7 +104,9 @@
   display: block;
   font-size: 2rem;
   font-weight: 800;
-  color: white;
+   background: linear-gradient(135deg, #ba8585 0%, #e3f2fd 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 .stat-label {
@@ -112,6 +114,7 @@
   font-size: 0.95rem;
   opacity: 0.8;
   margin-top: 0.25rem;
+  color: white !important;
 }
 
 .hero-cta {

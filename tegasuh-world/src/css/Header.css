@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  width: 100%;
+  width: 100vw;
   transition: all 0.3s ease;
   background: white;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -407,6 +407,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 2rem;
 }
 
 .mobile-menu-btn:hover {
@@ -748,13 +749,18 @@
   }
 }
 
+/* Change the breakpoint to 768px for better mobile support */
 @media (max-width: 768px) {
-  .main-header {
-    padding: 0.75rem 0;
+  .top-bar {
+    display: none;
   }
   
-  .mobile-nav {
-    width: 280px;
+  .desktop-nav {
+    display: none;
+  }
+  
+  .mobile-menu-btn {
+    display: flex !important;
   }
   
   .logo-wrapper {

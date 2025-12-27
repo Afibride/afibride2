@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import { toast } from 'react-toastify';
 import '../css/ContactPage.css';
 import { 
   FaPhone, 
@@ -47,29 +48,75 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+  
+  // Show loading toast
+  const toastId = toast.loading(
+    <div>
+      <strong>Sending your message...</strong>
+      <br />
+      <small>Please wait a moment</small>
+    </div>,
+    {
+      position: "top-center",
+      autoClose: false,
+      hideProgressBar: false,
+    }
+  );
+
+  // Simulate API call
+  setTimeout(() => {
+    console.log('Form submitted:', formData);
     
-    // Simulate API call
+    // Update toast to success
+    toast.update(toastId, {
+      render: (
+        <div>
+          <strong>✓ Message Sent Successfully!</strong>
+          <br />
+          <small>We'll respond within 24 hours</small>
+        </div>
+      ),
+      type: "success",
+      isLoading: false,
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+    });
+
+    // Additional success info
     setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setSubmitted(true);
-      setIsSubmitting(false);
-      
-      setTimeout(() => {
-        setSubmitted(false);
-        setFormData({
-          name: '',
-          email: '',
-          phone: '',
-          service: '',
-          message: '',
-          urgency: 'normal'
-        });
-      }, 5000);
-    }, 1500);
-  };
+      toast.info(
+        <div>
+          <strong>📞 Emergency Contact</strong>
+          <br />
+          <small>For urgent matters, call +237 677 433 511</small>
+        </div>,
+        {
+          position: "bottom-right",
+          autoClose: 4000,
+        }
+      );
+    }, 1000);
+
+    setSubmitted(true);
+    setIsSubmitting(false);
+    
+    setTimeout(() => {
+      setSubmitted(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        service: '',
+        message: '',
+        urgency: 'normal'
+      });
+    }, 5000);
+  }, 1500);
+};
 
   return (
     <>
