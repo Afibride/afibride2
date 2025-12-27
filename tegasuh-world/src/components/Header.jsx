@@ -165,12 +165,15 @@ const Header = () => {
           <div className="header-content">
             {/* Logo */}
             <Link to="/" className="logo-wrapper">
+            <div className="logo-container">
               <div className="logo">
+                <img src="/logo.png" alt="TEGASUH WORLD Logo" className="logo-image" />
                 <div className="logo-main">
                   <span className="logo-primary">TEGASUH</span>
                   <span className="logo-secondary">WORLD</span>
                 </div>
-                <div className="logo-tagline">MAJOR SERVICES</div>
+              </div>
+              <div className="logo-tagline">MAJOR SERVICES</div>
               </div>
             </Link>
 
@@ -185,11 +188,13 @@ const Header = () => {
                     }`}
                   >
                     {link.dropdown ? (
-                      <>
+                      <div 
+                        className="dropdown-container"
+                        onMouseEnter={() => setServicesDropdown(true)}
+                        onMouseLeave={() => setServicesDropdown(false)}
+                      >
                         <button 
                           className="nav-link dropdown-toggle"
-                          onMouseEnter={() => setServicesDropdown(true)}
-                          onMouseLeave={() => setServicesDropdown(false)}
                           aria-expanded={servicesDropdown}
                           aria-haspopup="true"
                         >
@@ -199,8 +204,6 @@ const Header = () => {
                         </button>
                         <div 
                           className={`dropdown-menu ${servicesDropdown ? 'show' : ''}`}
-                          onMouseEnter={() => setServicesDropdown(true)}
-                          onMouseLeave={() => setServicesDropdown(false)}
                           aria-hidden={!servicesDropdown}
                         >
                           {link.dropdown.map((subLink) => (
@@ -216,7 +219,7 @@ const Header = () => {
                             </div>
                           ))}
                         </div>
-                      </>
+                      </div>
                     ) : (
                       <Link 
                         to={link.path} 

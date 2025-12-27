@@ -120,16 +120,37 @@
   transform: translateY(-1px);
 }
 
+.logo-container {
+  flex-direction: column;
+}
+
+.logo-tagline {
+  font-size: 0.75rem;
+  color: #666;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 3.5rem;
+}
+
 .logo {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  flex-direction: row; /* Stack image and text vertically */
+  align-items: center; /* Center align items */
+  gap: 0.25rem; /* Space between image and text */
+}
+
+.logo-image {
+  width: 50px; /* Adjust size as needed */
+  height: auto;
+  flex-shrink: 0; /* Prevent shrinking */
 }
 
 .logo-main {
   display: flex;
+  flex-direction: row; /* TEGASUH and WORLD in one line */
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.5rem; /* Space between TEGASUH and WORLD */
 }
 
 .logo-primary {
@@ -245,6 +266,10 @@
   position: relative;
 }
 
+.dropdown-container {
+  position: relative;
+}
+
 .dropdown-toggle {
   background: none;
   border: none;
@@ -283,7 +308,7 @@
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.nav-item.has-dropdown:hover .dropdown-menu {
+.dropdown-container:hover .dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
