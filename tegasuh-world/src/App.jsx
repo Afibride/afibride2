@@ -10,10 +10,12 @@ import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import NotFoundPage from './pages/NotFoundPage';
 import './css/App.css';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       {/* Toastify Container */}
       <ToastContainer
         position="top-right"

@@ -1204,112 +1204,75 @@
   background: linear-gradient(135deg, #2196f3 0%, #42a5f5 100%);
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .container {
-    max-width: 100%;
-    padding: 0 2rem;
-  }
-}
+/* ============================================= */
+/* MOBILE RESPONSIVE STYLES */
+/* ============================================= */
 
-@media (max-width: 1024px) {
-  .confirmation-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  
-  .booking-summary-card {
-    position: static;
-  }
-  
-  .booking-form-container {
-    padding: 2rem;
-  }
-}
-
+/* Global Mobile Fixes */
 @media (max-width: 768px) {
-  .booking-page {
-    padding: 1.5rem 0 3rem;
+  body, .booking-page {
+    width: 100vw !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
   
   .container {
-    padding: 0 1rem;
+    width: 100vw !important;
+    max-width: 100% !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    overflow-x: hidden !important;
   }
   
-  .booking-header h1 {
-    font-size: 2rem;
+  * {
+    box-sizing: border-box;
+    max-width: 100vw;
   }
   
-  .booking-header p {
-    font-size: 1.1rem;
+  section {
+    width: 100vw !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
   }
   
-  .booking-form-container {
-    padding: 1.5rem;
-    border-radius: 20px;
+  /* Disable hover effects on mobile */
+  .service-option:hover,
+  .service-option.selected,
+  .payment-option:hover,
+  .payment-option.selected,
+  .help-card:hover,
+  .summary-section:hover,
+  .payment-methods-card:hover,
+  .terms-card:hover,
+  .btn-change:hover,
+  .btn-edit:hover,
+  .btn-prev:hover,
+  .btn-next:hover,
+  .btn-submit:hover {
+    transform: none !important;
+    box-shadow: none !important;
   }
   
-  .step-header h2 {
-    font-size: 1.6rem;
+  .service-option:hover::before,
+  .service-option.selected::before,
+  .help-card:hover::before {
+    transform: scaleX(0) !important;
   }
   
-  .step-header h2 svg {
-    font-size: 1.3rem;
-    padding: 0.4rem;
+  /* Touch feedback */
+  .service-option:active,
+  .payment-option:active,
+  .help-card:active {
+    opacity: 0.8;
+    transform: scale(0.98) !important;
   }
   
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  /* Booking Header */
+  .booking-header {
+    margin-bottom: 2rem;
+    padding: 0 0.5rem;
   }
   
-  .service-option {
-    padding: 1.25rem;
-  }
-  
-  .selected-service-details {
-    flex-direction: column;
-    text-align: center;
-    gap: 1rem;
-  }
-  
-  .selected-service-icon {
-    align-self: center;
-    width: 64px;
-    height: 64px;
-    font-size: 2rem;
-  }
-  
-  .form-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
-  
-  .booking-navigation {
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  .booking-navigation button {
-    width: 100%;
-    justify-content: center;
-    min-width: auto;
-  }
-  
-  .progress-steps {
-    display: none;
-  }
-  
-  .help-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .help-card {
-    padding: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
   .booking-header h1 {
     font-size: 1.8rem;
   }
@@ -1318,12 +1281,120 @@
     font-size: 1rem;
   }
   
+  /* Progress Tracker */
+  .booking-progress-tracker {
+    margin-bottom: 2rem;
+  }
+  
+  .progress-bar {
+    margin-bottom: 1rem;
+  }
+  
+  .progress-steps {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 0.75rem !important;
+    padding: 0 1rem 1rem 1rem !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .progress-steps::after {
+    content: '';
+    flex: 0 0 1rem;
+  }
+  
+  .progress-step {
+    flex: 0 0 80px !important;
+    min-width: 80px !important;
+    scroll-snap-align: start !important;
+  }
+  
+  .progress-step::before {
+    display: none;
+  }
+  
+  .step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+  
+  .step-label {
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
+  
+  /* Hide scrollbar */
+  .progress-steps::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Form Container */
+  .booking-form-container {
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin: 0 0.5rem 2rem;
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+  }
+  
+  /* Step Header */
+  .step-header {
+    margin-bottom: 1.75rem;
+  }
+  
   .step-header h2 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+  }
+  
+  .step-header h2 svg {
+    font-size: 1.2rem;
+    padding: 0.4rem;
+  }
+  
+  .step-header p {
+    font-size: 1rem;
+  }
+  
+  /* Service Selection - Horizontal Scroll */
+  .services-section {
+    margin-bottom: 2rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .services-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 1rem !important;
+    padding: 0 1rem 1rem 0 !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .services-grid::after {
+    content: '';
+    flex: 0 0 1rem;
   }
   
   .service-option {
-    padding: 1rem;
+    flex: 0 0 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+    scroll-snap-align: start !important;
+    padding: 1.25rem;
+  }
+  
+  .service-option-header {
+    gap: 0.75rem;
   }
   
   .service-icon {
@@ -1336,45 +1407,373 @@
     font-size: 1.1rem;
   }
   
-  .payment-option-header {
+  .service-description {
+    font-size: 0.85rem;
+  }
+  
+  .popular-badge {
+    top: 0.75rem;
+    right: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    font-size: 0.7rem;
+  }
+  
+  .service-features {
+    gap: 0.4rem;
+  }
+  
+  .feature-tag {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+  }
+  
+  /* Hide scrollbar */
+  .services-grid::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Selected Service Summary */
+  .selected-service-summary {
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  
+  .selected-service-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .btn-change {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .selected-service-details {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
   }
   
-  .payment-option-header h4 {
-    text-align: center;
-  }
-  
-  .payment-check {
-    margin: 0.5rem 0 0 0;
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-  }
-  
-  .booking-help-section {
-    padding: 1.5rem;
-  }
-  
-  .help-card {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.5rem;
-  }
-  
-  .help-icon {
+  .selected-service-icon {
     align-self: center;
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
   }
   
+  .selected-service-info h4 {
+    font-size: 1.2rem;
+  }
+  
+  .service-features-preview h4 {
+    font-size: 1rem;
+  }
+  
+  .service-features-preview ul {
+    gap: 0.4rem;
+  }
+  
+  .service-features-preview li {
+    font-size: 0.85rem;
+    gap: 0.5rem;
+  }
+  
+  /* Form Grid */
+  .form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+  
+  .form-help {
+    font-size: 0.8rem;
+  }
+  
+  .phone-prefix {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Confirmation Grid */
+  .confirmation-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem;
+  }
+  
+  .booking-summary-card {
+    position: static;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .summary-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .btn-edit {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+  
+  .summary-content {
+    gap: 1.25rem;
+  }
+  
+  .summary-section {
+    padding: 1rem;
+  }
+  
+  .summary-section h4 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .summary-item {
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem 0;
+  }
+  
+  .summary-item span {
+    font-size: 0.85rem;
+  }
+  
+  .summary-item strong {
+    text-align: left;
+    padding-left: 0;
+    font-size: 0.95rem;
+  }
+  
+  .summary-requests {
+    padding: 1rem;
+  }
+  
+  .summary-requests p {
+    font-size: 0.9rem;
+  }
+  
+  /* Payment Methods */
+  .payment-methods-card,
+  .terms-card {
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .payment-methods-card h3,
+  .terms-header h3 {
+    font-size: 1.2rem;
+  }
+  
+  .payment-option {
+    padding: 1rem;
+  }
+  
+  .payment-option-header {
+    gap: 1rem;
+  }
+  
+  .payment-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+  
+  .payment-option-header h4 {
+    font-size: 1rem;
+  }
+  
+  .payment-description {
+    font-size: 0.85rem;
+  }
+  
+  /* Terms Card */
   .terms-checkbox {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
+    padding: 1rem;
   }
   
   .terms-checkbox input[type="checkbox"] {
     margin-top: 0;
+  }
+  
+  .terms-checkbox label {
+    font-size: 0.9rem;
+  }
+  
+  .security-features {
+    padding: 1rem;
+  }
+  
+  .security-item {
+    font-size: 0.85rem;
+  }
+  
+  /* Navigation Buttons */
+  .booking-navigation {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+  
+  .btn-prev,
+  .btn-next,
+  .btn-submit {
+    width: 100%;
+    min-width: auto !important;
+    padding: 1rem 1.5rem;
+    justify-content: center;
+    font-size: 1rem;
+    min-height: 48px;
+  }
+  
+  /* Booking Help Section - Horizontal Scroll */
+  .booking-help-section {
+    padding: 2rem 0;
+    margin: 0 0.5rem 1rem;
+    width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem);
+  }
+  
+  .help-grid {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    gap: 1rem !important;
+    padding: 0 1rem 1rem 1rem !important;
+    scroll-behavior: smooth !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  
+  .help-grid::after {
+    content: '';
+    flex: 0 0 1rem;
+  }
+  
+  .help-card {
+    flex: 0 0 280px !important;
+    min-width: 280px !important;
+    max-width: 280px !important;
+    scroll-snap-align: start !important;
+    padding: 1.5rem;
+  }
+  
+  .help-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .help-content h3 {
+    font-size: 1.2rem;
+  }
+  
+  .help-content p {
+    font-size: 0.9rem;
+  }
+  
+  .help-link {
+    font-size: 0.9rem;
+  }
+  
+  .security-badge,
+  .support-badge {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.75rem;
+  }
+  
+  /* Hide scrollbar */
+  .help-grid::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Extra Small Devices */
+@media (max-width: 576px) {
+  .booking-header h1 {
+    font-size: 1.6rem;
+  }
+  
+  .booking-header p {
+    font-size: 0.95rem;
+  }
+  
+  .step-header h2 {
+    font-size: 1.3rem;
+  }
+  
+  .service-option {
+    flex: 0 0 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+  }
+  
+  .help-card {
+    flex: 0 0 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+  }
+  
+  .progress-step {
+    flex: 0 0 70px !important;
+    min-width: 70px !important;
+  }
+  
+  .step-label {
+    font-size: 0.7rem;
+  }
+  
+  .payment-option-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .payment-check {
+    margin: 0;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 360px) {
+  .service-option {
+    flex: 0 0 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+  }
+  
+  .help-card {
+    flex: 0 0 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+  }
+  
+  .progress-step {
+    flex: 0 0 65px !important;
+    min-width: 65px !important;
+  }
+  
+  .booking-header h1 {
+    font-size: 1.4rem;
+  }
+  
+  .step-header h2 {
+    font-size: 1.2rem;
   }
 }
 
@@ -1397,4 +1796,3 @@
     position: static;
   }
 }
-
