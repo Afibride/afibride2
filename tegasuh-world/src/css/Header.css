@@ -440,16 +440,16 @@
   visibility: visible;
 }
 
-/* Mobile Navigation */
+/* Mobile Navigation - Fixed to slide from left */
 .mobile-nav {
   position: fixed;
   top: 0;
-  right: -100%;
+  left: -100%;
   width: 320px;
   height: 100vh;
   background: white;
-  box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
-  transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 5px 0 30px rgba(0, 0, 0, 0.1);
+  transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1000;
   overflow-y: auto;
   display: flex;
@@ -457,7 +457,7 @@
 }
 
 .mobile-nav.open {
-  right: 0;
+  left: 0;
 }
 
 .mobile-nav-header {
@@ -707,6 +707,47 @@
   color: #1a237e;
 }
 
+/* Animation for mobile menu - Updated for left slide */
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.mobile-nav.open {
+  animation: slideInLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav:not(.open) {
+  animation: slideOutLeft 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Header Animation on Scroll */
+@keyframes headerSlideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.header-container.scrolled {
+  animation: headerSlideDown 0.3s ease;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
   .nav-list {
@@ -778,7 +819,12 @@
 
 @media (max-width: 576px) {
   .mobile-nav {
-    width: 100%;
+    width: 85%;
+    left: -85%;
+  }
+  
+  .mobile-nav.open {
+    left: 0;
   }
   
   .mobile-nav-header {
@@ -808,47 +854,6 @@
   .logo-tagline {
     font-size: 0.6rem;
   }
-}
-
-/* Animation for mobile menu */
-@keyframes slideInRight {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideOutRight {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
-}
-
-.mobile-nav.open {
-  animation: slideInRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mobile-nav:not(.open) {
-  animation: slideOutRight 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Header Animation on Scroll */
-@keyframes headerSlideDown {
-  from {
-    transform: translateY(-100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
-.header-container.scrolled {
-  animation: headerSlideDown 0.3s ease;
 }
 
 /* Social Links - Top Bar */

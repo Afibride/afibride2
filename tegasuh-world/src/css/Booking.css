@@ -1080,34 +1080,35 @@
   box-shadow: 0 20px 40px rgba(76, 175, 80, 0.3);
 }
 
-/* Help Section */
+/* Booking Help Section */
 .booking-help-section {
-  background: white;
-  border-radius: 24px;
-  padding: 2.5rem;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.08),
-    0 5px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  margin-top: 3rem;
+  border-radius: 20px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .help-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .help-card {
-  display: flex;
-  align-items: flex-start;
-  gap: 1.5rem;
-  padding: 1.75rem;
+  background: white;
   border-radius: 16px;
-  background: #f8f9fa;
+  padding: 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 1px solid transparent;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+  flex-direction: column;
 }
 
 .help-card::before {
@@ -1117,15 +1118,14 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #1a237e, #283593);
+  background: linear-gradient(90deg, #1a237e 0%, #ff6b6b 100%);
   transform: scaleX(0);
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .help-card:hover {
-  transform: translateY(-5px);
-  border-color: #e2e8f0;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .help-card:hover::before {
@@ -1133,69 +1133,75 @@
 }
 
 .help-icon {
-  background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
-  color: white;
-  width: 60px;
-  height: 60px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  flex-shrink: 0;
-  box-shadow: 0 5px 15px rgba(26, 35, 126, 0.2);
+  font-size: 2.5rem;
+  color: #1a237e;
+  margin-bottom: 1rem;
+  transition: color 0.3s ease;
+}
+
+.help-card:hover .help-icon {
+  color: #ff6b6b;
+}
+
+.help-content {
+  flex-direction: column;
 }
 
 .help-content h3 {
-  margin: 0 0 0.5rem 0;
-  color: #2d3748;
-  font-size: 1.25rem;
+  font-size: 1.4rem;
+  color: #1a237e;
+  margin-bottom: 0.5rem;
   font-weight: 700;
 }
 
 .help-content p {
-  margin: 0 0 1rem 0;
-  color: #718096;
-  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 1rem;
   line-height: 1.6;
+  font-size: 1rem;
 }
 
 .help-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
   color: #1a237e;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 0.95rem;
-  transition: all 0.3s;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  gap: 0.5rem;
 }
 
 .help-link:hover {
+  color: #ff6b6b;
   gap: 0.75rem;
-  color: #283593;
 }
 
 .help-link::after {
   content: '→';
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
 .help-link:hover::after {
-  transform: translateX(5px);
+  transform: translateX(4px);
 }
 
-.security-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+.security-badge,
+.support-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #4caf50 0%, #66bb6a 100%);
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.85rem;
-  font-weight: 700;
+  font-weight: 600;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.support-badge {
+  background: linear-gradient(135deg, #2196f3 0%, #42a5f5 100%);
 }
 
 /* Responsive Design */

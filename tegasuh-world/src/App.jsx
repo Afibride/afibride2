@@ -3,14 +3,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/ToastifyCustom.css';
-
-// Import pages
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import ServicesPage from './pages/ServicesPage';
 import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
 import NotFoundPage from './pages/NotFoundPage';
+import './css/App.css';
 
 function App() {
   return (

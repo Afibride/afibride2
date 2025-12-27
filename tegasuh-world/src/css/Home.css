@@ -1,7 +1,7 @@
 /* Home Page Specific Styles */
 .home-page {
-  overflow-x: hidden !important;
   width: 100vw;
+  overflow-x: hidden !important;
 }
 
 /* Hero Slider */
@@ -9,7 +9,7 @@
   position: relative;
   height: 85vh;
   min-height: 700px;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .hero-slide {
@@ -770,6 +770,13 @@
   .btn-hero {
     padding: 1rem 2rem;
     font-size: 1.1rem;
+    min-height: 48px;  /* Enhanced touch target */
+  }
+  
+  /* Disable heavy transforms on mobile for performance */
+  .btn-hero:hover {
+    transform: none;
+    box-shadow: none;
   }
   
   .stats-grid {
@@ -779,31 +786,68 @@
   
   .stat-item {
     padding: 1.5rem;
+    min-height: 120px;  /* Better spacing */
   }
   
   .stat-content h3 {
     font-size: 2.5rem;
   }
   
-  .section-title {
-    font-size: 2rem;
-  }
-  
   .services-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 2rem;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1rem;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
   }
   
   .service-card-featured {
-    max-width: 400px;
-    margin: 0 auto;
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    max-width: 280px;
+  }
+  
+  .btn-learn-more,
+  .btn-book-now {
+    padding: 1.2rem;  /* Larger touch targets */
+    min-height: 48px;
+    font-size: 1.1rem;
+  }
+  
+  /* Disable hover transforms on mobile */
+  .service-card-featured:hover {
+    transform: none;
+  }
+  
+  .btn-learn-more:hover,
+  .btn-book-now:hover {
+    transform: none;
+  }
+  
+  .why-choose-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
   }
   
   .why-choose-text h2 {
     font-size: 2.5rem;
   }
   
+  .benefit-item {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
   .testimonials-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;  
+  }
+  
+  .testimonial-card {
+    padding: 1.5rem;  
   }
   
   .cta-content h2 {
@@ -819,6 +863,14 @@
     width: 100%;
     max-width: 300px;
     justify-content: center;
+    min-height: 48px;  /* Touch-friendly */
+    padding: 1.2rem 2rem;
+  }
+  
+  /* Disable hover effects */
+  .btn-cta:hover {
+    transform: none;
+    box-shadow: none;
   }
   
   .cta-contact-info p {

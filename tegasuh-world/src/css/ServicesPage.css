@@ -1063,8 +1063,65 @@
 }
 
 @media (max-width: 768px) {
+  /* Mobile Improvements - General */
+  .container {
+    padding: 0 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+  
+  h3 {
+    font-size: 1.4rem;
+  }
+  
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-cta-primary,
+  .btn-cta-secondary,
+  .btn-cta-call,
+  .btn-package-select,
+  .btn-service-book,
+  .btn-service-details {
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    min-height: 48px; 
+    width: 100%; 
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .btn-cta-primary:hover,
+  .btn-cta-secondary:hover,
+  .btn-cta-call:hover,
+  .btn-package-select:hover,
+  .btn-service-book:hover,
+  .btn-service-details:hover {
+    transform: none; 
+    box-shadow: none;
+  }
+  
+  /* Hero Section Mobile */
   .services-hero {
     padding: 3rem 0;
+    min-height: auto;
+  }
+  
+  .services-hero-content {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
   }
   
   .hero-text h1 {
@@ -1072,73 +1129,206 @@
   }
   
   .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+  }
+  
+  .hero-stats {
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .stat {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .stat-label {
+    font-size: 0.9rem;
+  }
+  
+  .hero-cta .cta-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .cta-features {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  /* Filter Section Mobile */
+  .services-filter-section {
+    padding: 2rem 0;
   }
   
   .filter-categories {
     flex-direction: column;
-    align-items: center;
+    gap: 0.5rem;
   }
   
   .filter-btn {
-    width: 100%;
-    max-width: 300px;
     justify-content: center;
+    padding: 1rem;
+    font-size: 1rem;
   }
   
-  .popular-grid,
-  .full-grid {
+  .filter-count {
+    display: none; 
+  }
+  
+  /* Services Grid Mobile */
+  .services-main {
+    padding: 2rem 0;
+  }
+  
+  .services-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
   
-  .packages-grid {
-    grid-template-columns: 1fr;
+  .service-card {
+    padding: 1.5rem;
+    text-align: center;
   }
   
-  .package-card.popular {
-    transform: none;
+  .service-card-header {
+    flex-direction: column;
+    gap: 1rem;
   }
   
-  .benefits-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .cta-content h2 {
+  .service-icon,
+  .service-icon-large {
     font-size: 2.5rem;
   }
   
-  .section-header h2,
-  .packages-header h2,
-  .why-choose-header h2 {
-    font-size: 2.2rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .hero-text h1 {
-    font-size: 1.8rem;
+  .service-features {
+    text-align: left;
+    gap: 0.5rem;
   }
   
-  .hero-stats {
-    grid-template-columns: 1fr;
+  .feature-item {
+    font-size: 0.9rem;
   }
   
-  .stat {
-    max-width: 250px;
-    margin: 0 auto;
+  .service-stats {
+    justify-content: center;
+    gap: 1rem;
   }
   
   .service-card-footer {
     flex-direction: column;
+    gap: 0.5rem;
   }
   
-  .btn-service-details,
-  .btn-service-book {
-    width: 100%;
+  .service-hover-info,
+  .service-hover-card {
+    display: none;
+  }
+  
+  /* Packages Section Mobile */
+  .service-packages {
+    padding: 2rem 0;
+  }
+  
+  .packages-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .package-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .package-price .amount {
+    font-size: 1.8rem;
+  }
+  
+  .package-features {
+    text-align: left;
+  }
+  
+  .special-offer {
+    margin-top: 1rem;
+  }
+  
+  /* Why Choose Us Mobile */
+  .why-choose-services {
+    padding: 2rem 0;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .benefit-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .benefit-icon {
+    font-size: 2rem;
+  }
+  
+  /* CTA Section Mobile */
+  .services-cta {
+    padding: 3rem 0;
+    text-align: center;
+  }
+  
+  .cta-content h2 {
+    font-size: 2rem;
+  }
+  
+  .cta-actions {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
   }
   
   .cta-info {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  h2 {
+    font-size: 1.6rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary,
+  .btn-cta-primary,
+  .btn-cta-secondary,
+  .btn-cta-call,
+  .btn-package-select,
+  .btn-service-book,
+  .btn-service-details {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+  
+  .hero-stats {
+    gap: 0.5rem;
+  }
+  
+  .stat-number {
+    font-size: 1.3rem;
   }
 }

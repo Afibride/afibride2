@@ -513,7 +513,7 @@ const ServicesPage = () => {
               <h3 className="package-name">Essentials Package</h3>
               <div className="package-price">
                 <span className="price">Starting at</span>
-                <span className="amount">$599</span>
+                <span className="amount">XAF599</span>
                 <span className="period">/person</span>
               </div>
               <p className="package-description">Perfect for budget-conscious travelers</p>
@@ -538,7 +538,7 @@ const ServicesPage = () => {
               <h3 className="package-name">Premium Experience</h3>
               <div className="package-price">
                 <span className="price">Starting at</span>
-                <span className="amount">$1,299</span>
+                <span className="amount">XAF1,299</span>
                 <span className="period">/person</span>
               </div>
               <p className="package-description">Luxury travel with premium amenities</p>

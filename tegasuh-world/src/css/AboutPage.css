@@ -622,10 +622,6 @@
     font-size: 2rem;
   }
   
-  .cta-content p {
-    font-size: 1.1rem;
-  }
-  
   .values-grid {
     grid-template-columns: 1fr;
   }
