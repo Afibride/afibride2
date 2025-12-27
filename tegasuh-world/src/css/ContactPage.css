@@ -753,9 +753,9 @@
 /* Map Section */
 .map-section {
   margin: 4rem auto;
-  max-width: 1400px;
   width: 100vw;
   padding: 0 1rem;
+  margin-right: 10rem !important;
 }
 
 .map-header {
@@ -1040,8 +1040,9 @@
 
 .faq-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 3fr));
   gap: 2rem;
+  margin-right: 10rem;
 }
 
 .faq-item {
@@ -1509,6 +1510,7 @@
   .faq-grid {
     grid-template-columns: 1fr !important;
     gap: 1rem;
+    margin-right: 3rem;
   }
   
   .faq-item {
