@@ -275,6 +275,7 @@ const Header = () => {
         {/* Mobile Header */}
         <div className="mobile-nav-header">
           <div className="mobile-logo">
+            <img src="/logo.png" alt="TEGASUH WORLD Logo" className="logo-image" />
             <div className="mobile-logo-main">
               <span className="mobile-logo-primary">TEGASUH</span>
               <span className="mobile-logo-secondary">WORLD</span>
