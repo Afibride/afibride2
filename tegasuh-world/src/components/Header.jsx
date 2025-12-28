@@ -193,7 +193,8 @@ const Header = () => {
                         onMouseEnter={() => setServicesDropdown(true)}
                         onMouseLeave={() => setServicesDropdown(false)}
                       >
-                        <button 
+                        <Link 
+                          to={link.path}
                           className="nav-link dropdown-toggle"
                           aria-expanded={servicesDropdown}
                           aria-haspopup="true"
@@ -201,7 +202,7 @@ const Header = () => {
                           <span className="nav-icon">{link.icon}</span>
                           {link.label}
                           <FaChevronDown className="dropdown-chevron" />
-                        </button>
+                        </Link>
                         <div 
                           className={`dropdown-menu ${servicesDropdown ? 'show' : ''}`}
                           aria-hidden={!servicesDropdown}

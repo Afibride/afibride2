@@ -7,6 +7,7 @@
   transition: all 0.3s ease;
   background: white;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+  overflow: visible;
 }
 
 .header-container.scrolled {
@@ -99,6 +100,7 @@
 .main-header {
   padding: 1rem 0;
   position: relative;
+  overflow: visible;
 }
 
 .header-content {
@@ -218,7 +220,6 @@
   align-items: center;
   gap: 0.5rem;
   position: relative;
-  overflow: hidden;
 }
 
 .nav-link::before {
@@ -271,9 +272,6 @@
 }
 
 .dropdown-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -296,7 +294,6 @@
   top: 100%;
   left: 0;
   background: white;
-  min-width: 220px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   border-radius: 12px;
   padding: 0.75rem 0;
@@ -304,7 +301,7 @@
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  z-index: 1000;
+  z-index: 1100;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -340,7 +337,6 @@
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
-  overflow: hidden;
 }
 
 .dropdown-link::before {
